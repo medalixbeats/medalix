@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>medalix</title>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600&display=swap" rel="stylesheet"/>
+  <link rel="icon" href="favicon.png" type="image/png" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --sky-start: #89caff;
-      --sky-mid: #a3d2ff;
-      --sky-end: #cbe6ff;
+      --sky-start: #a0c8ff;
+      --sky-mid: #7eb6ff;
+      --sky-end: #4f91c6;
       --text-color: #fff;
     }
 
@@ -19,18 +20,31 @@
       box-sizing: border-box;
     }
 
-    body {
+    html, body {
+      height: 100%;
+      overflow: hidden;
       font-family: 'Montserrat', sans-serif;
       color: var(--text-color);
       background: linear-gradient(to bottom, var(--sky-start), var(--sky-mid), var(--sky-end));
-      overflow-x: hidden;
       position: relative;
+    }
+
+    .wrapper {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      text-align: center;
+      padding: 2rem;
     }
 
     .sun {
       position: absolute;
-      top: 50%;
-      left: -10%;
+      top: 0%;
+      left: -20%;
       width: 100px;
       height: 100px;
       border-radius: 50%;
@@ -39,40 +53,44 @@
                   0 0 80px 30px rgba(255, 140, 0, 0.4),
                   0 0 120px 60px rgba(255, 120, 0, 0.2);
       animation: sunArc 60s linear infinite;
-      z-index: 0;
+      z-index: 1;
     }
 
     @keyframes sunArc {
-      0%   { transform: translate(0vw, 0vh); opacity: 1; }
-      50%  { transform: translate(50vw, 30vh); }
+      0% { transform: translate(0vw, 0vh); opacity: 1; }
+      25% { transform: translate(25vw, 20vh); }
+      50% { transform: translate(50vw, 30vh); }
+      75% { transform: translate(75vw, 20vh); }
       100% { transform: translate(100vw, 0vh); opacity: 0; }
+    }
+
+    .cloud, .cloud::before, .cloud::after {
+      background: #fff;
+      opacity: 0.8;
+      border-radius: 50%;
     }
 
     .cloud {
       position: absolute;
-      background: #fff;
-      opacity: 0.8;
-      border-radius: 50%;
+      z-index: 2;
       animation: cloudDrift 80s linear infinite;
-      z-index: 1;
     }
 
-    .cloud::before, .cloud::after {
-      content: '';
-      position: absolute;
-      background: #fff;
-      border-radius: 50%;
+    @keyframes cloudDrift {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(160vw); }
     }
 
     .cloud1 {
       width: 100px;
       height: 60px;
-      top: 20%;
+      top: 15%;
       left: -200px;
-      animation-delay: 0s;
     }
 
     .cloud1::before {
+      content: '';
+      position: absolute;
       width: 60px;
       height: 60px;
       top: -20px;
@@ -80,6 +98,8 @@
     }
 
     .cloud1::after {
+      content: '';
+      position: absolute;
       width: 80px;
       height: 80px;
       top: -30px;
@@ -89,12 +109,14 @@
     .cloud2 {
       width: 120px;
       height: 70px;
-      top: 35%;
+      top: 30%;
       left: -300px;
       animation-delay: 30s;
     }
 
     .cloud2::before {
+      content: '';
+      position: absolute;
       width: 70px;
       height: 70px;
       top: -20px;
@@ -102,45 +124,37 @@
     }
 
     .cloud2::after {
+      content: '';
+      position: absolute;
       width: 90px;
       height: 90px;
       top: -35px;
       left: 60px;
     }
 
-    @keyframes cloudDrift {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(160vw); }
-    }
-
-    .rain {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 10;
-    }
-
-    .rain-drop {
+    .torii {
       position: absolute;
-      width: 2px;
-      height: 15px;
-      background: rgba(255, 255, 255, 0.4);
-      animation: fall 1s linear infinite;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 220px;
+      z-index: 0;
+      opacity: 0.9;
     }
 
-    @keyframes fall {
-      0% { transform: translateY(-100px); }
-      100% { transform: translateY(100vh); }
+    .ripple {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 25%;
+      background: radial-gradient(circle at 50% 80%, #6fb4d6 0%, #3d84a8 60%, #1e607c 100%);
+      animation: rippleAnim 6s infinite linear;
+      z-index: 0;
     }
 
-    .wrapper {
-      text-align: center;
-      padding: 3rem 1rem 4rem;
-      z-index: 2;
-      position: relative;
+    @keyframes rippleAnim {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
     }
 
     .logo {
@@ -148,59 +162,42 @@
       height: 130px;
       border-radius: 50%;
       object-fit: cover;
-      margin-bottom: 1rem;
       box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+      margin-bottom: 1rem;
+      z-index: 3;
     }
 
     h1 {
-      font-size: 2.5rem;
+      font-size: clamp(2rem, 6vw, 3rem);
       text-transform: lowercase;
       margin-bottom: 1rem;
     }
 
     .description {
       max-width: 600px;
-      margin: 0 auto 2rem;
-      font-size: 1.1rem;
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
       line-height: 1.6;
-    }
-
-    .torii-background {
-      position: absolute;
-      bottom: 40px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 500px;
-      max-width: 90%;
-      z-index: 0;
-      opacity: 0.9;
-      pointer-events: none;
-    }
-
-    .water {
-      position: absolute;
-      bottom: 0;
-      width: 100%;
-      height: 150px;
-      background: linear-gradient(to top, #74c4dd, transparent 90%);
-      z-index: 0;
+      z-index: 3;
     }
 
     iframe {
       width: 100%;
-      max-width: 400px;
+      max-width: 600px;
       height: 152px;
       border: none;
       border-radius: 12px;
       box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
       margin-bottom: 1rem;
+      z-index: 3;
     }
 
     .visualizer {
       display: flex;
       justify-content: center;
       gap: 5px;
-      margin: 1rem 0 2rem;
+      margin: 0.5rem 0 2rem;
+      z-index: 3;
     }
 
     .bar {
@@ -225,11 +222,13 @@
       justify-content: center;
       gap: 1.5rem;
       margin-bottom: 2rem;
+      z-index: 3;
     }
 
     .platforms img {
       width: 40px;
       height: 40px;
+      filter: drop-shadow(0 0 2px rgba(0,0,0,0.5));
       transition: transform 0.3s ease;
     }
 
@@ -238,23 +237,35 @@
     }
 
     footer {
+      position: absolute;
+      bottom: 10px;
+      left: 0;
+      width: 100%;
       text-align: center;
+      color: rgba(255,255,255,0.85);
       font-size: 0.9rem;
-      margin-top: 5rem;
-      padding-bottom: 4rem;
+      padding: 1rem;
+      z-index: 10;
     }
 
     footer .platforms {
-      margin-bottom: 1rem;
+      margin-bottom: 0.5rem;
+      gap: 2rem;
     }
 
-    footer a img {
-      margin: 0 10px;
+    .x-logo {
+      width: 40px;
+      height: 40px;
+      transition: transform 0.3s ease;
+    }
+
+    .x-logo:hover {
+      transform: scale(1.1);
     }
 
     @media (max-width: 480px) {
       .description { font-size: 1rem; }
-      .platforms img { width: 32px; height: 32px; }
+      .platforms img, .x-logo { width: 32px; height: 32px; }
     }
   </style>
 </head>
@@ -262,60 +273,33 @@
   <div class="sun"></div>
   <div class="cloud cloud1"></div>
   <div class="cloud cloud2"></div>
-  <div class="rain"></div>
-
-  <img src="torii.png" alt="Torii Gate" class="torii-background" />
-  <div class="water"></div>
+  <img src="torii.png" alt="Torii Gate" class="torii" />
+  <div class="ripple"></div>
 
   <div class="wrapper">
     <img src="sun.png" alt="medalix logo" class="logo" />
-    <h1>medalix</h1>
-    <p class="description">
-      medalix is a beat maker who aims to make people who listen to his music relax and disconnect from the world. medalix's music is perfect for studying in peace or just having a chill time.
-    </p>
-
+    <h1>Medalix</h1>
+    <div class="description">
+      medalix is a beat maker who aims to make people who listens to his music to relax and to be disconnected from the world. medalix's music is perfect for those who want to study in peace or just have a good time relaxing.
+    </div>
     <iframe src="https://open.spotify.com/embed/track/1qGtfxYhO7XzvSBIlC7qEY?si=1940e078e0ce486e" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-
     <div class="visualizer">
       <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
     </div>
-
     <div class="platforms">
-      <a href="https://open.spotify.com/artist/2dHfpdn18bWQf5vutaTSnX" target="_blank">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/8/84/Spotify_icon.svg" alt="Spotify logo"/>
-      </a>
-      <a href="https://soundcloud.com/medalix" target="_blank">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/0/02/Soundcloud_icon.svg" alt="SoundCloud logo"/>
-      </a>
-      <a href="https://music.youtube.com/watch?v=mxx4zXOVZv4" target="_blank">
-        <img src="youtube_music_logo.png" alt="YouTube Music logo"/>
-      </a>
+      <a href="https://open.spotify.com/artist/2dHfpdn18bWQf5vutaTSnX" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/8/84/Spotify_icon.svg" alt="Spotify logo" /></a>
+      <a href="https://soundcloud.com/medalix" target="_blank"><img src="4c6272c3-22be-478b-af0c-1f03c963931d.png" alt="SoundCloud logo" /></a>
+      <a href="https://music.youtube.com/watch?v=mxx4zXOVZv4" target="_blank"><img src="youtube_music_logo.png" alt="YouTube Music logo" /></a>
     </div>
   </div>
 
   <footer>
     <div class="platforms">
-      <a href="https://x.com/medalixbeats" target="_blank">
-        <img src="x-logo.png" alt="X logo"/>
-      </a>
-      <a href="https://www.instagram.com/medalixbeats" target="_blank">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram logo"/>
-      </a>
+      <a href="https://x.com/medalixbeats" target="_blank"><img src="x-logo.png" alt="X logo" class="x-logo"></a>
+      <a href="https://www.instagram.com/medalixbeats" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram logo"></a>
     </div>
     <p>© & ℗ 2025 medalix. All rights reserved. | Website created by medalix</p>
     <p>For business inquiries, contact <a href="mailto:medalixbeats@gmail.com">medalixbeats@gmail.com</a></p>
   </footer>
-
-  <script>
-    const rain = document.querySelector('.rain');
-    for (let i = 0; i < 100; i++) {
-      const drop = document.createElement('div');
-      drop.className = 'rain-drop';
-      drop.style.left = `${Math.random() * 100}vw`;
-      drop.style.animationDuration = `${0.5 + Math.random()}s`;
-      drop.style.opacity = Math.random();
-      rain.appendChild(drop);
-    }
-  </script>
 </body>
 </html>
