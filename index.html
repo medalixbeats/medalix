@@ -2,10 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>medalix</title>
-  <link rel="icon" href="favicon.png" type="image/png" />
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600&display=swap" rel="stylesheet"/>
   <style>
     :root {
       --sky-start: #89caff;
@@ -20,8 +19,7 @@
       box-sizing: border-box;
     }
 
-    html, body {
-      height: 100%;
+    body {
       font-family: 'Montserrat', sans-serif;
       color: var(--text-color);
       background: linear-gradient(to bottom, var(--sky-start), var(--sky-mid), var(--sky-end));
@@ -140,7 +138,7 @@
 
     .wrapper {
       text-align: center;
-      padding: 3rem 1rem 1rem;
+      padding: 3rem 1rem 4rem;
       z-index: 2;
       position: relative;
     }
@@ -169,14 +167,23 @@
 
     .torii-background {
       position: absolute;
-      bottom: 0;
+      bottom: 40px;
       left: 50%;
       transform: translateX(-50%);
       width: 500px;
       max-width: 90%;
       z-index: 0;
-      opacity: 0.85;
+      opacity: 0.9;
       pointer-events: none;
+    }
+
+    .water {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 150px;
+      background: linear-gradient(to top, #74c4dd, transparent 90%);
+      z-index: 0;
     }
 
     iframe {
@@ -233,8 +240,8 @@
     footer {
       text-align: center;
       font-size: 0.9rem;
-      margin-top: 2rem;
-      padding-bottom: 2rem;
+      margin-top: 5rem;
+      padding-bottom: 4rem;
     }
 
     footer .platforms {
@@ -255,11 +262,10 @@
   <div class="sun"></div>
   <div class="cloud cloud1"></div>
   <div class="cloud cloud2"></div>
-
   <div class="rain"></div>
 
-  <!-- Torii background -->
   <img src="torii.png" alt="Torii Gate" class="torii-background" />
+  <div class="water"></div>
 
   <div class="wrapper">
     <img src="sun.png" alt="medalix logo" class="logo" />
@@ -275,23 +281,32 @@
     </div>
 
     <div class="platforms">
-      <a href="https://open.spotify.com/artist/2dHfpdn18bWQf5vutaTSnX" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/8/84/Spotify_icon.svg" alt="Spotify logo" /></a>
-      <a href="https://soundcloud.com/medalix" target="_blank"><img src="soundcloud.png" alt="SoundCloud logo" /></a>
-      <a href="https://music.youtube.com/watch?v=mxx4zXOVZv4" target="_blank"><img src="youtube_music_logo.png" alt="YouTube Music logo" /></a>
+      <a href="https://open.spotify.com/artist/2dHfpdn18bWQf5vutaTSnX" target="_blank">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/8/84/Spotify_icon.svg" alt="Spotify logo"/>
+      </a>
+      <a href="https://soundcloud.com/medalix" target="_blank">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/0/02/Soundcloud_icon.svg" alt="SoundCloud logo"/>
+      </a>
+      <a href="https://music.youtube.com/watch?v=mxx4zXOVZv4" target="_blank">
+        <img src="youtube_music_logo.png" alt="YouTube Music logo"/>
+      </a>
     </div>
-
-    <footer>
-      <div class="platforms">
-        <a href="https://x.com/medalixbeats" target="_blank"><img src="x-logo.png" alt="X logo" /></a>
-        <a href="https://www.instagram.com/medalixbeats" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram logo" /></a>
-      </div>
-      <p>© & ℗ 2025 medalix. All rights reserved. | Website created by medalix</p>
-      <p>For business inquiries, contact <a href="mailto:medalixbeats@gmail.com">medalixbeats@gmail.com</a></p>
-    </footer>
   </div>
 
+  <footer>
+    <div class="platforms">
+      <a href="https://x.com/medalixbeats" target="_blank">
+        <img src="x-logo.png" alt="X logo"/>
+      </a>
+      <a href="https://www.instagram.com/medalixbeats" target="_blank">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram logo"/>
+      </a>
+    </div>
+    <p>© & ℗ 2025 medalix. All rights reserved. | Website created by medalix</p>
+    <p>For business inquiries, contact <a href="mailto:medalixbeats@gmail.com">medalixbeats@gmail.com</a></p>
+  </footer>
+
   <script>
-    // Generate rain drops
     const rain = document.querySelector('.rain');
     for (let i = 0; i < 100; i++) {
       const drop = document.createElement('div');
