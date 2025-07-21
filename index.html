@@ -26,20 +26,13 @@
       color: var(--text-color);
       background: linear-gradient(to bottom, var(--sky-start), var(--sky-mid), var(--sky-end));
       overflow-x: hidden;
-    }
-
-    body {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
       position: relative;
     }
 
     .sun {
       position: absolute;
-      top: 60px;
-      right: 100px;
+      top: 50%;
+      left: -10%;
       width: 100px;
       height: 100px;
       border-radius: 50%;
@@ -52,8 +45,8 @@
     }
 
     @keyframes sunArc {
-      0% { transform: translate(0vw, 0vh); opacity: 1; }
-      50% { transform: translate(50vw, -30vh); }
+      0%   { transform: translate(0vw, 0vh); opacity: 1; }
+      50%  { transform: translate(50vw, 30vh); }
       100% { transform: translate(100vw, 0vh); opacity: 0; }
     }
 
@@ -174,9 +167,16 @@
       line-height: 1.6;
     }
 
-    .torii {
-      max-width: 300px;
-      margin: 2rem auto;
+    .torii-background {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 500px;
+      max-width: 90%;
+      z-index: 0;
+      opacity: 0.85;
+      pointer-events: none;
     }
 
     iframe {
@@ -233,8 +233,12 @@
     footer {
       text-align: center;
       font-size: 0.9rem;
-      margin-top: 3rem;
+      margin-top: 2rem;
       padding-bottom: 2rem;
+    }
+
+    footer .platforms {
+      margin-bottom: 1rem;
     }
 
     footer a img {
@@ -252,9 +256,10 @@
   <div class="cloud cloud1"></div>
   <div class="cloud cloud2"></div>
 
-  <div class="rain">
-    <!-- Rain will be generated via JS -->
-  </div>
+  <div class="rain"></div>
+
+  <!-- Torii background -->
+  <img src="torii.png" alt="Torii Gate" class="torii-background" />
 
   <div class="wrapper">
     <img src="sun.png" alt="medalix logo" class="logo" />
@@ -262,8 +267,6 @@
     <p class="description">
       medalix is a beat maker who aims to make people who listen to his music relax and disconnect from the world. medalix's music is perfect for studying in peace or just having a chill time.
     </p>
-
-    <img src="torii.png" alt="Torii Gate" class="torii" />
 
     <iframe src="https://open.spotify.com/embed/track/1qGtfxYhO7XzvSBIlC7qEY?si=1940e078e0ce486e" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
 
@@ -273,7 +276,7 @@
 
     <div class="platforms">
       <a href="https://open.spotify.com/artist/2dHfpdn18bWQf5vutaTSnX" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/8/84/Spotify_icon.svg" alt="Spotify logo" /></a>
-      <a href="https://soundcloud.com/medalix" target="_blank"><img src="4c6272c3-22be-478b-af0c-1f03c963931d.png" alt="SoundCloud logo" /></a>
+      <a href="https://soundcloud.com/medalix" target="_blank"><img src="soundcloud.png" alt="SoundCloud logo" /></a>
       <a href="https://music.youtube.com/watch?v=mxx4zXOVZv4" target="_blank"><img src="youtube_music_logo.png" alt="YouTube Music logo" /></a>
     </div>
 
@@ -288,7 +291,7 @@
   </div>
 
   <script>
-    // Generate rain
+    // Generate rain drops
     const rain = document.querySelector('.rain');
     for (let i = 0; i < 100; i++) {
       const drop = document.createElement('div');
