@@ -1,259 +1,269 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>medalix</title>
+  <title>cloudzin</title>
+
+  <!-- Favicon -->
   <link rel="icon" type="image/png" href="favicon.png" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600&display=swap" rel="stylesheet" />
   <style>
+    :root {
+      --sky-start: #FFD580;
+      --sky-mid: #FF7F50;
+      --sky-end: #2C3E50;
+      --text-color: #fff;
+    }
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
-
+    html, body {
+      height: 100%;
+      overflow-x: hidden;
+      font-family: 'Montserrat', sans-serif;
+      color: var(--text-color);
+      background: linear-gradient(to bottom, var(--sky-start), var(--sky-mid), var(--sky-end));
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior: contain;
+    }
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(to bottom, #a2c4f5, #d0e7ff);
-      overflow: hidden;
-      position: relative;
-      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      flex: 1;
+      min-height: 100vh;
+      padding-bottom: 2rem;
     }
 
-    .sky {
-      position: absolute;
-      width: 100%;
-      height: 60%;
-      background: linear-gradient(to bottom, #8bbcf1, #a5d4fc);
-      overflow: hidden;
-      z-index: 0;
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
-
-    .cloud {
-      position: absolute;
-      background: #fff;
-      border-radius: 50%;
-      width: 100px;
-      height: 60px;
-      top: 15%;
-      animation: floatClouds 40s linear infinite;
-      opacity: 0.7;
+    @keyframes sunArc {
+      0% { transform: translate(0vw, 0vh); opacity: 1; }
+      25% { transform: translate(25vw, -20vh); }
+      50% { transform: translate(50vw, -30vh); }
+      75% { transform: translate(75vw, -20vh); }
+      100% { transform: translate(100vw, 0vh); opacity: 0; }
     }
-
-    .cloud:nth-child(2) {
-      left: 30%;
-      width: 120px;
-      height: 70px;
-      top: 10%;
-      animation-delay: 5s;
-    }
-
-    @keyframes floatClouds {
-      from {
-        left: -150px;
-      }
-      to {
-        left: 110%;
-      }
+    @keyframes pulse {
+      0%, 100% { transform: scaleY(1); }
+      50% { transform: scaleY(2); }
     }
 
     .sun {
       position: absolute;
-      width: 80px;
-      height: 80px;
-      background: radial-gradient(circle, #ffcc00, #ff9900);
-      border-radius: 50%;
-      z-index: 2;
-      animation: sunArc 60s linear infinite;
-    }
-
-    @keyframes sunArc {
-      0% {
-        transform: translateX(-10vw) translateY(20vh);
-      }
-      25% {
-        transform: translateX(20vw) translateY(-10vh);
-      }
-      50% {
-        transform: translateX(50vw) translateY(-30vh);
-      }
-      75% {
-        transform: translateX(80vw) translateY(-10vh);
-      }
-      100% {
-        transform: translateX(110vw) translateY(20vh);
-      }
-    }
-
-    .rain {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      background-image: url('https://i.imgur.com/NM4sXfk.png');
-      background-size: contain;
-      pointer-events: none;
-      animation: rainAnim 0.4s linear infinite;
-      z-index: 3;
-    }
-
-    @keyframes rainAnim {
-      to {
-        background-position: 0 100%;
-      }
-    }
-
-    .water {
-      position: absolute;
-      width: 100%;
-      height: 40%;
-      bottom: 0;
-      background: linear-gradient(to top, #98cbe2, #d0e9ff);
-      overflow: hidden;
-      z-index: 1;
-    }
-
-    .ripples {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 5%, transparent 60%);
-      background-size: 200px 200px;
-      animation: rippleEffect 4s linear infinite;
-      opacity: 0.3;
-    }
-
-    @keyframes rippleEffect {
-      0% {
-        background-position: 0 0;
-      }
-      100% {
-        background-position: 200px 200px;
-      }
-    }
-
-    .torii {
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 300px;
-      z-index: 2;
-      opacity: 0.8;
-    }
-
-    .content {
-      position: relative;
-      z-index: 4;
-      text-align: center;
-      top: 20vh;
-    }
-
-    .avatar {
+      top: 40%;
+      left: -10%;
       width: 100px;
       height: 100px;
       border-radius: 50%;
+      background: radial-gradient(circle at center, #fff9c4 0%, #ffca28 40%, #ff7043 80%);
+      box-shadow: 0 0 30px 15px rgba(255, 200, 100, 0.6),
+                  0 0 80px 30px rgba(255, 140, 0, 0.4),
+                  0 0 120px 60px rgba(255, 120, 0, 0.2);
+      animation: sunArc 60s linear infinite;
+      z-index: 0;
+    }
+    .cloud {
+      position: absolute;
+      background: #fff;
+      opacity: 0.8;
+      border-radius: 50%;
+      animation: cloudDrift 80s linear infinite;
+      z-index: 1;
+    }
+    .cloud::before, .cloud::after {
+      content: '';
+      position: absolute;
+      background: #fff;
+      border-radius: 50%;
+    }
+    .cloud1 {
+      width: 100px;
+      height: 60px;
+      top: 20%;
+      left: -200px;
+      animation-delay: 0s;
+    }
+    .cloud1::before {
+      width: 60px;
+      height: 60px;
+      top: -20px;
+      left: 20px;
+    }
+    .cloud1::after {
+      width: 80px;
+      height: 80px;
+      top: -30px;
+      left: 60px;
+    }
+    .cloud2 {
+      width: 120px;
+      height: 70px;
+      top: 35%;
+      left: -300px;
+      animation-delay: 30s;
+    }
+    .cloud2::before {
+      width: 70px;
+      height: 70px;
+      top: -20px;
+      left: 15px;
+    }
+    .cloud2::after {
+      width: 90px;
+      height: 90px;
+      top: -35px;
+      left: 60px;
+    }
+    @keyframes cloudDrift {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(160vw); }
+    }
+
+    .main-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      flex: 1;
+      text-align: center;
+      animation: fadeIn 2s ease-in;
+      padding: 2rem;
+      z-index: 2;
+    }
+    .logo {
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
       object-fit: cover;
-      margin-bottom: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+      margin-bottom: 1rem;
     }
-
     h1 {
-      font-size: 2.5rem;
-      color: white;
+      font-size: clamp(2rem, 6vw, 3rem);
+      text-transform: lowercase;
+      margin-bottom: 1rem;
     }
-
-    p {
-      font-size: 1rem;
-      color: #f0f0f0;
+    .description {
       max-width: 600px;
-      margin: 10px auto;
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+      line-height: 1.6;
     }
 
-    .player {
-      margin: 20px auto;
+    iframe {
+      width: 100%;
+      max-width: 600px;
+      height: 152px;
+      border: none;
+      border-radius: 12px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+      margin-bottom: 1rem;
     }
-
-    .links {
+    .visualizer {
       display: flex;
       justify-content: center;
-      gap: 20px;
-      margin-top: 10px;
+      gap: 5px;
+      margin: 0.5rem 0 2rem;
+    }
+    .bar {
+      width: 5px;
+      height: 20px;
+      background: white;
+      animation: pulse 1s infinite ease-in-out;
+    }
+    .bar:nth-child(2) { animation-delay: 0.2s; }
+    .bar:nth-child(3) { animation-delay: 0.4s; }
+    .bar:nth-child(4) { animation-delay: 0.6s; }
+    .bar:nth-child(5) { animation-delay: 0.8s; }
+
+    .platforms {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    .platforms img {
+      width: 40px;
+      height: 40px;
+      filter: drop-shadow(0 0 2px rgba(0,0,0,0.5));
+      transition: transform 0.3s ease;
+    }
+    .platforms a:hover img {
+      transform: scale(1.1);
     }
 
-    .links img {
-      height: 32px;
-      width: 32px;
-      filter: drop-shadow(0 0 4px #00000066);
-    }
-
-    .footer {
-      position: absolute;
-      bottom: 10px;
+    footer {
+      position: relative;
+      z-index: 2;
       width: 100%;
+      max-width: 650px;
       text-align: center;
-      color: #f0f0f0;
-      font-size: 0.8rem;
-      z-index: 5;
+      color: rgba(255,255,255,0.8);
+      font-size: 0.9rem;
+      padding: 1rem;
+    }
+    footer .platforms {
+      margin-bottom: 0.5rem;
+      gap: 2rem;
+    }
+    .x-logo {
+      width: 40px;
+      height: 40px;
+      transition: transform 0.3s ease;
+    }
+    .x-logo:hover {
+      transform: scale(1.1);
     }
 
-    .sakura {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 3;
-      background-image: url('https://i.imgur.com/bFeh5PH.png');
-      animation: sakuraFall 20s linear infinite;
-    }
-
-    @keyframes sakuraFall {
-      0% {
-        background-position: 0 -100%;
-      }
-      100% {
-        background-position: 0 100%;
-      }
+    @media (max-width: 480px) {
+      .description { font-size: 1rem; }
+      .platforms img, .x-logo { width: 32px; height: 32px; }
     }
   </style>
 </head>
-
 <body>
-  <div class="sky">
-    <div class="cloud"></div>
-    <div class="cloud"></div>
-    <div class="sun"></div>
-    <div class="sakura"></div>
-  </div>
-  <div class="rain"></div>
-  <div class="content">
-    <img src="sun.png" alt="medalix avatar" class="avatar" />
-    <h1>medalix</h1>
-    <p>medalix is a beat maker who aims to make people who listen to his music relax and disconnect from the world. medalix's music is perfect for studying in peace or just having a chill time.</p>
-    <div class="player">
-      <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/0XYZD2gF3P4Oa7vXGpErMb?utm_source=generator&theme=0" width="100%" height="80" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-    </div>
-    <div class="links">
-      <a href="#"><img src="spotify.png" alt="Spotify"></a>
-      <a href="#"><img src="soundcloud.png" alt="SoundCloud"></a>
-      <a href="#"><img src="applemusic.png" alt="Apple Music"></a>
-    </div>
-  </div>
+  <div class="sun"></div>
+  <div class="cloud cloud1"></div>
+  <div class="cloud cloud2"></div>
 
-  <div class="footer">
-    <div class="links">
-      <a href="#"><img src="x.png" alt="X"></a>
-      <a href="#"><img src="instagram.png" alt="Instagram"></a>
+  <div class="wrapper">
+    <div class="main-content">
+      <img src="logo.png" alt="cloudzin logo" class="logo" />
+      <h1>medalix</h1>
+      <div class="description">
+        medalix is an all around beat maker who aims to make people get relaxed and chill listening to his beats. medalix music is perfect for studying, relaxing, taking a walk or just something to regularly listening to.
+      </div>
+      <iframe src="https://open.spotify.com/embed/track/1qGtfxYhO7XzvSBIlC7qEY?si=1940e078e0ce486e" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+      <div class="visualizer">
+        <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
+      </div>
+      <div class="platforms">
+        <a href="https://open.spotify.com/artist/2dHfpdn18bWQf5vutaTSnX" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/8/84/Spotify_icon.svg" alt="Spotify logo" /></a>
+        <a href="https://soundcloud.com/medalix" target="_blank"><img src="4c6272c3-22be-478b-af0c-1f03c963931d.png" alt="SoundCloud logo" /></a>
+        <a href="https://music.youtube.com/channel/UCyEFxM1oB93kMvQ3NT3xOHw" target="_blank"><img src="youtube_music_logo.png" alt="YouTube Music logo" /></a>
+      </div>
     </div>
-    <p>
-      &copy; &oplus; 2025 medalix. All rights reserved. | Website created by medalix<br>
-      For business inquiries, contact <a href="mailto:medalixbeats@gmail.com" style="color: #cbe7ff; text-decoration: underline;">medalixbeats@gmail.com</a>
-    </p>
-  </div>
 
-  <div class="water">
-    <div class="ripples"></div>
-    <img src="torii.png" alt="Torii Gate" class="torii" />
+    <footer>
+      <div class="platforms">
+        <a href="https://x.com/medalixbeats" target="_blank"><img src="x-logo.png" alt="X logo" class="x-logo"></a>
+        <a href="https://www.instagram.com/medalixbeats" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram logo"></a>
+      </div>
+      <p>© & ℗ 2025 medalix. All rights reserved. | Website created by medalix</a>
+      <p>For business inquiries please contact <a href="mailto:medalixbeats@gmail.com">medalixbeats@gmail.com</a></p>
+    </footer>
   </div>
 </body>
-
 </html>
