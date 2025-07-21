@@ -11,29 +11,47 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --sky-start: #FFD580;
-      --sky-mid: #FF7F50;
-      --sky-end: #2C3E50;
+      --sky-start: #011933; /* deep navy */
+      --sky-mid: #2a3959;   /* blue-gray dusk */
+      --sky-end: #ff4c00;   /* vivid orange */
       --text-color: #fff;
     }
+
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
+
     html, body {
       height: 100%;
       overflow-x: hidden;
       font-family: 'Montserrat', sans-serif;
       color: var(--text-color);
       background: linear-gradient(to bottom, var(--sky-start), var(--sky-mid), var(--sky-end));
+      background-size: 400% 400%;
+      animation: skyShift 60s ease infinite;
       -webkit-overflow-scrolling: touch;
       overscroll-behavior: contain;
     }
+
+    @keyframes skyShift {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
     body {
       display: flex;
       flex-direction: column;
     }
+
     .wrapper {
       display: flex;
       flex-direction: column;
@@ -48,6 +66,7 @@
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
     }
+
     @keyframes sunArc {
       0% { transform: translate(0vw, 0vh); opacity: 1; }
       25% { transform: translate(25vw, -20vh); }
@@ -55,6 +74,7 @@
       75% { transform: translate(75vw, -20vh); }
       100% { transform: translate(100vw, 0vh); opacity: 0; }
     }
+
     @keyframes pulse {
       0%, 100% { transform: scaleY(1); }
       50% { transform: scaleY(2); }
@@ -74,6 +94,7 @@
       animation: sunArc 60s linear infinite;
       z-index: 0;
     }
+
     .cloud {
       position: absolute;
       background: #fff;
@@ -82,12 +103,14 @@
       animation: cloudDrift 80s linear infinite;
       z-index: 1;
     }
+
     .cloud::before, .cloud::after {
       content: '';
       position: absolute;
       background: #fff;
       border-radius: 50%;
     }
+
     .cloud1 {
       width: 100px;
       height: 60px;
@@ -95,18 +118,21 @@
       left: -200px;
       animation-delay: 0s;
     }
+
     .cloud1::before {
       width: 60px;
       height: 60px;
       top: -20px;
       left: 20px;
     }
+
     .cloud1::after {
       width: 80px;
       height: 80px;
       top: -30px;
       left: 60px;
     }
+
     .cloud2 {
       width: 120px;
       height: 70px;
@@ -114,18 +140,21 @@
       left: -300px;
       animation-delay: 30s;
     }
+
     .cloud2::before {
       width: 70px;
       height: 70px;
       top: -20px;
       left: 15px;
     }
+
     .cloud2::after {
       width: 90px;
       height: 90px;
       top: -35px;
       left: 60px;
     }
+
     @keyframes cloudDrift {
       0% { transform: translateX(0); }
       100% { transform: translateX(160vw); }
@@ -142,6 +171,7 @@
       padding: 2rem;
       z-index: 2;
     }
+
     .logo {
       width: 130px;
       height: 130px;
@@ -150,11 +180,13 @@
       box-shadow: 0 4px 10px rgba(0,0,0,0.4);
       margin-bottom: 1rem;
     }
+
     h1 {
       font-size: clamp(2rem, 6vw, 3rem);
       text-transform: lowercase;
       margin-bottom: 1rem;
     }
+
     .description {
       max-width: 600px;
       font-size: 1.2rem;
@@ -171,18 +203,21 @@
       box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
       margin-bottom: 1rem;
     }
+
     .visualizer {
       display: flex;
       justify-content: center;
       gap: 5px;
       margin: 0.5rem 0 2rem;
     }
+
     .bar {
       width: 5px;
       height: 20px;
       background: white;
       animation: pulse 1s infinite ease-in-out;
     }
+
     .bar:nth-child(2) { animation-delay: 0.2s; }
     .bar:nth-child(3) { animation-delay: 0.4s; }
     .bar:nth-child(4) { animation-delay: 0.6s; }
@@ -194,12 +229,14 @@
       gap: 1.5rem;
       margin-bottom: 2rem;
     }
+
     .platforms img {
       width: 40px;
       height: 40px;
       filter: drop-shadow(0 0 2px rgba(0,0,0,0.5));
       transition: transform 0.3s ease;
     }
+
     .platforms a:hover img {
       transform: scale(1.1);
     }
@@ -214,15 +251,18 @@
       font-size: 0.9rem;
       padding: 1rem;
     }
+
     footer .platforms {
       margin-bottom: 0.5rem;
       gap: 2rem;
     }
+
     .x-logo {
       width: 40px;
       height: 40px;
       transition: transform 0.3s ease;
     }
+
     .x-logo:hover {
       transform: scale(1.1);
     }
